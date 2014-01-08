@@ -1,12 +1,12 @@
 {
-    "name": "niconicontroller",
+    "name": "NicoPlayButton",
     "manifest_version": 2,
     "version": "0.0.1",
     "description": "ニコニコ動画の再生/一時停止をどこからでも",
     "content_scripts": [
         {
             "matches": ["http://www.nicovideo.jp/watch/*"],
-            "js": ["niconicontroller.js"]
+            "js": ["nicoplaybutton.js"]
         }
     ],
     "background": {
@@ -15,7 +15,7 @@
     "permissions": ["tabs"],
     "browser_action": {
         "default_icon": "icon/play_grey.png",
-        "default_title": "niconicontroller"
+        "default_title": "nico play button"
     },
     "web_accessible_resources": [
         "icon/*"
