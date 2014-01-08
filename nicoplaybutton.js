@@ -1,14 +1,17 @@
 
-var menu = document.getElementById('siteHeaderRightMenuContainer');
+var menu = document.querySelector(".siteHeaderMenuList");
 var registerButton = document.createElement('li');
 var anchor = document.createElement('a');
+var img = document.createElement('img');
+img.src = chrome.extension.getURL("icon/add.png");
+img.height = "17";
 anchor.href = 'javascript:void(0);';
 anchor.addEventListener('click', function(){
     chrome.runtime.sendMessage({
         action : "register"
     });
 });
-anchor.textContent = 'niconicontollerに登録';
+anchor.appendChild(img);
 registerButton.appendChild(anchor);
 menu.appendChild(registerButton);
 
