@@ -1,4 +1,3 @@
-// todo: play/stop時のアイコン
 var tabId;
 
 chrome.runtime.onMessage.addListener(
@@ -11,9 +10,18 @@ chrome.browserAction.onClicked.addListener(function(){
     if (! tabId) return;
 
     // todo: tabidがなかった場合の処理
-    chrome.tabs.sendMessage(tabId, {
-        action    : "toggle"
-    });
+    chrome.tabs.sendMessage(
+        tabId,
+        { action: "toggle" },
+        function(isPlaying) {
+            if(isPlaying) {
+                chrome.browserAction.setIcon({path: "icon/play_black.png"});
+            } else {
+                // now pause.png image size is bad.
+                chrome.browserAction.setIcon({path: "icon/pause.png"});
+            }
+        }
+    );
 });
 
 // for onMessage callback functions

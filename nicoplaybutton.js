@@ -60,6 +60,8 @@ function unregister() {
 }
 
 //for onMessage callback functions
-function toggle() {
-    player.ext_play(player.ext_getStatus() !== "playing");
+function toggle(args, sender, sendResponse) {
+    var isPlaying = player.ext_getStatus() == "playing";
+    player.ext_play(! isPlaying);
+    sendResponse(isPlaying);
 }
