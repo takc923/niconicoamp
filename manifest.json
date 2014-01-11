@@ -3,6 +3,11 @@
     "manifest_version": 2,
     "version": "0.0.1",
     "description": "ニコニコ動画の再生/一時停止をどこからでも",
+    "icons": {
+        "128": "icon/icon.png",
+        "48": "icon/icon.png",
+        "16": "icon/icon.png"
+    },
     "content_scripts": [
         {
             "matches": ["http://www.nicovideo.jp/watch/*"],
@@ -14,7 +19,7 @@
     },
     "permissions": ["tabs"],
     "browser_action": {
-        "default_icon": "icon/play_grey.png",
+        "default_icon": "icon/icon.png",
         "default_title": "nico play button"
     },
     "web_accessible_resources": [

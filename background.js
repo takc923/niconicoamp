@@ -14,7 +14,7 @@ chrome.browserAction.onClicked.addListener(function(){
         { action: "toggle" },
         function(isPlaying) {
             if(chrome.runtime.lastError) {
-                chrome.browserAction.setIcon({path: "icon/play_grey.png"});
+                chrome.browserAction.setIcon({path: "icon/icon.png"});
             }else if(isPlaying) {
                 chrome.browserAction.setIcon({path: "icon/play_black.png"});
             } else {
@@ -38,5 +38,5 @@ function register(args, sender){
 }
 function unregister(dummy, sender){
     tabId = null;
-    chrome.browserAction.setIcon({path: "icon/play_grey.png"});
+    chrome.browserAction.setIcon({path: "icon/icon.png"});
 }
