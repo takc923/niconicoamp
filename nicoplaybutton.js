@@ -50,7 +50,8 @@ function makeButton(path, display) {
 
 function register() {
     chrome.runtime.sendMessage({
-        action : "register"
+        action : "register",
+        args: { isPlaying: player.ext_getStatus() == "playing"}
     });
 }
 function unregister() {

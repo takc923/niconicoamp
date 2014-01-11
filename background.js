@@ -24,9 +24,10 @@ chrome.browserAction.onClicked.addListener(function(){
 });
 
 // for onMessage callback functions
-function register(dummy, sender){
+function register(args, sender){
     tabId = sender.tab.id;
-    chrome.browserAction.setIcon({path: "icon/play_black.png"});
+    var iconPath = args.isPlaying ? "icon/pause.png" : "icon/play_black.png";
+    chrome.browserAction.setIcon({path: iconPath});
 }
 function unregister(dummy, sender){
     tabId = null;
