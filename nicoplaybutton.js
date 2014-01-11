@@ -1,22 +1,44 @@
-
+// todo: 他のtabでregisterされた時の処理
 var menu = document.querySelector(".siteHeaderMenuList");
 var registerButton = document.createElement('li');
 var anchor = document.createElement('a');
+// add/subをregister/unregisterにしたほうがわかりやすい
 var imgAdd = makeButton("icon/add.png", "inline");
 var imgSub = makeButton("icon/sub.png", "none");
 anchor.href = 'javascript:void(0);';
 anchor.addEventListener('click', function(){
+    if (isAlreadyRegistered()) {
+        displayAddButton();
+        unregister();
+    } else {
+        displaySubButton();
+        register();
+    }
+    function displayAddButton() {
+        imgAdd.style.display = 'inline';
+        imgSub.style.display = 'none';
+    }
+    function displaySubButton() {
+        imgAdd.style.display = 'none';
+        imgSub.style.display = 'inline';
+    }
+    function isAlreadyRegistered() {
+        return imgSub.style.display == 'inline';
+    }
+});
+
+function register() {
     chrome.runtime.sendMessage({
         action : "register"
     });
-    toggleDisplay();
+}
+function unregister() {
+    chrome.runtime.sendMessage({
+        action : "unregister"
+    });
+}
 
-    function toggleDisplay() {
-        var tmp = imgAdd.style.display;
-        imgAdd.style.display = imgSub.style.display;
-        imgSub.style.display = tmp;
-    }
-});
+
 anchor.appendChild(imgAdd);
 anchor.appendChild(imgSub);
 registerButton.appendChild(anchor);

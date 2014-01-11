@@ -1,3 +1,4 @@
+// todo: play/stop時のアイコン
 var tabId;
 
 chrome.runtime.onMessage.addListener(
@@ -18,4 +19,8 @@ chrome.browserAction.onClicked.addListener(function(){
 function register(dummy, sender){
     tabId = sender.tab.id;
     chrome.browserAction.setIcon({path: "icon/play_black.png"});
+}
+function unregister(dummy, sender){
+    tabId = null;
+    chrome.browserAction.setIcon({path: "icon/play_grey.png"});
 }
