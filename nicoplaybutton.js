@@ -27,18 +27,6 @@ anchor.addEventListener('click', function(){
     }
 });
 
-function register() {
-    chrome.runtime.sendMessage({
-        action : "register"
-    });
-}
-function unregister() {
-    chrome.runtime.sendMessage({
-        action : "unregister"
-    });
-}
-
-
 anchor.appendChild(imgAdd);
 anchor.appendChild(imgSub);
 registerButton.appendChild(anchor);
@@ -52,14 +40,26 @@ chrome.runtime.onMessage.addListener(
 
 var player = document.getElementById('external_nicoplayer');
 
-function toggle() {
-    player.ext_play(player.ext_getStatus() !== "playing");
-}
-
 function makeButton(path, display) {
     var img = document.createElement('img');
     img.src = chrome.extension.getURL(path);
     img.height = "17";
     img.style.display = display;
     return img;
+}
+
+function register() {
+    chrome.runtime.sendMessage({
+        action : "register"
+    });
+}
+function unregister() {
+    chrome.runtime.sendMessage({
+        action : "unregister"
+    });
+}
+
+//for onMessage callback functions
+function toggle() {
+    player.ext_play(player.ext_getStatus() !== "playing");
 }
