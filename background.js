@@ -16,6 +16,7 @@ chrome.browserAction.onClicked.addListener(function(){
     });
 });
 
+// for onMessage callback functions
 function register(dummy, sender){
     tabId = sender.tab.id;
     chrome.browserAction.setIcon({path: "icon/play_black.png"});
