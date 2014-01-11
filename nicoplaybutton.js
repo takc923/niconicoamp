@@ -1,4 +1,3 @@
-// todo: 他のtabでregisterされた時の処理
 var menu = document.querySelector(".siteHeaderMenuList");
 var registerButton = document.createElement('li');
 var anchor = document.createElement('a');
@@ -13,17 +12,6 @@ anchor.addEventListener('click', function(){
     } else {
         displaySubButton();
         register();
-    }
-    function displayAddButton() {
-        imgAdd.style.display = 'inline';
-        imgSub.style.display = 'none';
-    }
-    function displaySubButton() {
-        imgAdd.style.display = 'none';
-        imgSub.style.display = 'inline';
-    }
-    function isAlreadyRegistered() {
-        return imgSub.style.display == 'inline';
     }
 });
 
@@ -58,6 +46,18 @@ function unregister() {
     chrome.runtime.sendMessage({
         action : "unregister"
     });
+}
+
+function displayAddButton() {
+    imgAdd.style.display = 'inline';
+    imgSub.style.display = 'none';
+}
+function displaySubButton() {
+    imgAdd.style.display = 'none';
+    imgSub.style.display = 'inline';
+}
+function isAlreadyRegistered() {
+    return imgSub.style.display == 'inline';
 }
 
 //for onMessage callback functions

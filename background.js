@@ -25,6 +25,12 @@ chrome.browserAction.onClicked.addListener(function(){
 
 // for onMessage callback functions
 function register(args, sender){
+    if (tabId) {
+        chrome.tabs.sendMessage(
+            tabId,
+            { action: "displayAddButton" }
+        );
+    }
     tabId = sender.tab.id;
     var iconPath = args.isPlaying ? "icon/pause.png" : "icon/play_black.png";
     chrome.browserAction.setIcon({path: iconPath});
