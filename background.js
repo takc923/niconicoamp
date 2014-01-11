@@ -17,7 +17,6 @@ chrome.browserAction.onClicked.addListener(function(){
             if(isPlaying) {
                 chrome.browserAction.setIcon({path: "icon/play_black.png"});
             } else {
-                // now pause.png image size is bad.
                 chrome.browserAction.setIcon({path: "icon/pause.png"});
             }
         }
