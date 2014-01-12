@@ -25,6 +25,11 @@ chrome.browserAction.onClicked.addListener(function(){
     );
 });
 
+// 何故か空タブじゃないと発動しない
+chrome.tabs.onRemoved.addListener(function(removedTabId, removeInfo) {
+    if (removedTabId === tabId) unregister();
+});
+
 // for onMessage callback functions
 function register(args, sender){
     if (tabId) {
