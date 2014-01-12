@@ -1,4 +1,4 @@
-var tabId;
+var registeredTabId;
 
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
@@ -7,10 +7,10 @@ chrome.runtime.onMessage.addListener(
 );
 
 chrome.browserAction.onClicked.addListener(function(){
-    if (! tabId) return;
+    if (! registeredTabId) return;
 
     chrome.tabs.sendMessage(
-        tabId,
+        registeredTabId,
         { action: "toggle" },
         function(isPlaying) {
             if(chrome.runtime.lastError) {
@@ -27,19 +27,19 @@ chrome.browserAction.onClicked.addListener(function(){
 // 何故か空タブじゃないと発動しない
 // Chromeのバグだった: https://code.google.com/p/chromium/issues/detail?id=248998
 chrome.tabs.onRemoved.addListener(function(removedTabId, removeInfo) {
-    if (removedTabId === tabId) unregister();
+    if (removedTabId === registeredTabId) unregister();
 });
 // 仕方がないから自前でタブが消えてないかチェックする
 // 上記バグが修正されたら消す
 setInterval(function() {
-    chrome.tabs.get(tabId, function(tab) {
+    chrome.tabs.get(registeredTabId, function(tab) {
         if (tab === undefined) unregister();
     });
 }, 5000);
 
 chrome.tabs.onUpdated.addListener(function(updatedTabId, changeInfo) {
     if (changeInfo.status == 'loading'
-        && updatedTabId === tabId
+        && updatedTabId === registeredTabId
         && changeInfo.url.search(/^http:\/\/www.nicovideo.jp\/watch\//) == -1){
         unregister();
     }
@@ -47,19 +47,19 @@ chrome.tabs.onUpdated.addListener(function(updatedTabId, changeInfo) {
 
 // for onMessage callback functions
 function register(args, sender){
-    if (tabId) {
+    if (registeredTabId) {
         chrome.tabs.sendMessage(
-            tabId,
+            registeredTabId,
             { action: "displayAddButton" }
         );
     }
-    tabId = sender.tab.id;
+    registeredTabId = sender.tab.id;
     var iconPath = args.isPlaying ? "icon/pause.png" : "icon/play_black.png";
     chrome.browserAction.setIcon({path: iconPath});
     chrome.browserAction.setTitle({title: sender.tab.title.replace(/ - ニコニコ動画:.*$/, '')});
 }
 function unregister(dummy, sender){
-    tabId = null;
+    registeredTabId = null;
     chrome.browserAction.setIcon({path: "icon/icon.png"});
     chrome.browserAction.setTitle({title: "niconicoamp"});
 }
