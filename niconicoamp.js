@@ -30,7 +30,6 @@ var player = document.getElementById('external_nicoplayer');
 function makeButton(path, display) {
     var img = document.createElement('img');
     img.src = chrome.extension.getURL(path);
-    img.height = "17";
     img.style.display = display;
     return img;
 }
