@@ -4,9 +4,9 @@
     "version": "0.1.1",
     "description": "ニコニコ動画の再生/一時停止をどこからでも",
     "icons": {
-        "128": "icon/icon.png",
-        "48": "icon/icon.png",
-        "16": "icon/icon.png"
+        "128": "icon/icon48.png",
+        "48":  "icon/icon48.png",
+        "16":  "icon/icon.png"
     },
     "content_scripts": [
         {
