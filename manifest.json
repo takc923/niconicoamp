@@ -1,7 +1,7 @@
 {
     "name": "niconicoamp",
     "manifest_version": 2,
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "ニコニコ動画の再生/一時停止をどこからでも",
     "icons": {
         "128": "icon/icon.png",
