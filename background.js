@@ -1,3 +1,4 @@
+// todo: tab削除された時にhookする
 var tabId;
 
 chrome.runtime.onMessage.addListener(
@@ -35,8 +36,10 @@ function register(args, sender){
     tabId = sender.tab.id;
     var iconPath = args.isPlaying ? "icon/pause.png" : "icon/play_black.png";
     chrome.browserAction.setIcon({path: iconPath});
+    chrome.browserAction.setTitle({title: sender.tab.title.replace(/ - ニコニコ動画:.*$/, '')});
 }
 function unregister(dummy, sender){
     tabId = null;
     chrome.browserAction.setIcon({path: "icon/icon.png"});
+    chrome.browserAction.setTitle({title: "nico play button"});
 }
