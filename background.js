@@ -29,6 +29,14 @@ chrome.tabs.onRemoved.addListener(function(removedTabId, removeInfo) {
     if (removedTabId === tabId) unregister();
 });
 
+chrome.tabs.onUpdated.addListener(function(updatedTabId, changeInfo) {
+    if (changeInfo.status == 'loading'
+        && updatedTabId === tabId
+        && changeInfo.url.search(/^http:\/\/www.nicovideo.jp\/watch\//) == -1){
+        unregister();
+    }
+});
+
 // for onMessage callback functions
 function register(args, sender){
     if (tabId) {
