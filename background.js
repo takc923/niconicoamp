@@ -1,4 +1,3 @@
-// todo: tab削除された時にhookする
 var tabId;
 
 chrome.runtime.onMessage.addListener(
