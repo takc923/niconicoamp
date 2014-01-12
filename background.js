@@ -41,5 +41,5 @@ function register(args, sender){
 function unregister(dummy, sender){
     tabId = null;
     chrome.browserAction.setIcon({path: "icon/icon.png"});
-    chrome.browserAction.setTitle({title: "nico play button"});
+    chrome.browserAction.setTitle({title: "niconicoamp"});
 }
