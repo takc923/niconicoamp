@@ -25,6 +25,7 @@ chrome.browserAction.onClicked.addListener(function(){
 });
 
 // 何故か空タブじゃないと発動しない
+// Chromeのバグだった: https://code.google.com/p/chromium/issues/detail?id=248998
 chrome.tabs.onRemoved.addListener(function(removedTabId, removeInfo) {
     if (removedTabId === tabId) unregister();
 });
