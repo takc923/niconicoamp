@@ -1,22 +1,21 @@
 var menu = document.querySelector(".siteHeaderMenuList");
 var registerButton = document.createElement('li');
 var anchor = document.createElement('a');
-// add/subをregister/unregisterにしたほうがわかりやすい
-var imgAdd = makeButton("icon/add.png", "inline");
-var imgSub = makeButton("icon/sub.png", "none");
+var imgRegister = makeButton("icon/register.png", "inline");
+var imgUnregister = makeButton("icon/unregister.png", "none");
 anchor.href = 'javascript:void(0);';
 anchor.addEventListener('click', function(){
     if (isAlreadyRegistered()) {
-        displayAddButton();
+        displayRegisterButton();
         unregister();
     } else {
-        displaySubButton();
+        displayUnregisterButton();
         register();
     }
 });
 
-anchor.appendChild(imgAdd);
-anchor.appendChild(imgSub);
+anchor.appendChild(imgRegister);
+anchor.appendChild(imgUnregister);
 registerButton.appendChild(anchor);
 menu.appendChild(registerButton);
 
@@ -48,16 +47,16 @@ function unregister() {
     });
 }
 
-function displayAddButton() {
-    imgAdd.style.display = 'inline';
-    imgSub.style.display = 'none';
+function displayRegisterButton() {
+    imgRegister.style.display = 'inline';
+    imgUnregister.style.display = 'none';
 }
-function displaySubButton() {
-    imgAdd.style.display = 'none';
-    imgSub.style.display = 'inline';
+function displayUnregisterButton() {
+    imgRegister.style.display = 'none';
+    imgUnregister.style.display = 'inline';
 }
 function isAlreadyRegistered() {
-    return imgSub.style.display == 'inline';
+    return imgUnregister.style.display == 'inline';
 }
 
 //for onMessage callback functions
