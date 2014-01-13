@@ -50,7 +50,7 @@ function register(args, sender){
     if (registeredTabId) {
         chrome.tabs.sendMessage(
             registeredTabId,
-            { action: "displayAddButton" }
+            { action: "displayRegisterButton" }
         );
     }
     registeredTabId = sender.tab.id;
