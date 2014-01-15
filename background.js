@@ -32,6 +32,8 @@ chrome.tabs.onRemoved.addListener(function(removedTabId, removeInfo) {
 // 仕方がないから自前でタブが消えてないかチェックする
 // 上記バグが修正されたら消す
 setInterval(function() {
+    if (! registeredTabId) return;
+
     chrome.tabs.get(registeredTabId, function(tab) {
         if (tab === undefined) unregister();
     });
