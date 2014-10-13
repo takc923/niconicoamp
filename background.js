@@ -24,20 +24,9 @@ chrome.browserAction.onClicked.addListener(function(){
     );
 });
 
-// 何故か空タブじゃないと発動しない
-// Chromeのバグだった: https://code.google.com/p/chromium/issues/detail?id=248998
 chrome.tabs.onRemoved.addListener(function(removedTabId, removeInfo) {
     if (removedTabId === registeredTabId) unregister();
 });
-// 仕方がないから自前でタブが消えてないかチェックする
-// 上記バグが修正されたら消す
-setInterval(function() {
-    if (! registeredTabId) return;
-
-    chrome.tabs.get(registeredTabId, function(tab) {
-        if (tab === undefined) unregister();
-    });
-}, 5000);
 
 chrome.tabs.onUpdated.addListener(function(updatedTabId, changeInfo) {
     if (changeInfo.status == 'loading'
