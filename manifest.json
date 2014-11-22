@@ -1,7 +1,7 @@
 {
     "name": "niconicoamp",
     "manifest_version": 2,
-    "version": "0.1.4",
+    "version": "0.1.5",
     "description": "ニコニコ動画の再生/一時停止をどこからでも",
     "icons": {
         "128": "icon/icon48.png",
@@ -14,6 +14,14 @@
             "js": ["niconicoamp.js"]
         }
     ],
+    "commands": {
+        "toggle-play-and-stop": {
+            "suggested_key": {
+                "default": "Alt+Z"
+            },
+            "description": "Toggle play and stop"
+        }
+    },
     "background": {
         "scripts": ["background.js"]
     },

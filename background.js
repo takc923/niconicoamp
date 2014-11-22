@@ -6,7 +6,22 @@ chrome.runtime.onMessage.addListener(
     }
 );
 
-chrome.browserAction.onClicked.addListener(function(){
+chrome.browserAction.onClicked.addListener(toggle);
+chrome.commands.onCommand.addListener(toggle);
+
+chrome.tabs.onRemoved.addListener(function(removedTabId, removeInfo) {
+    if (removedTabId === registeredTabId) unregister();
+});
+
+chrome.tabs.onUpdated.addListener(function(updatedTabId, changeInfo) {
+    if (changeInfo.status == 'loading'
+        && updatedTabId === registeredTabId
+        && changeInfo.url.search(/^http:\/\/www.nicovideo.jp\/watch\//) == -1){
+        unregister();
+    }
+});
+
+function toggle() {
     if (! registeredTabId) return;
 
     chrome.tabs.sendMessage(
@@ -22,19 +37,7 @@ chrome.browserAction.onClicked.addListener(function(){
             }
         }
     );
-});
-
-chrome.tabs.onRemoved.addListener(function(removedTabId, removeInfo) {
-    if (removedTabId === registeredTabId) unregister();
-});
-
-chrome.tabs.onUpdated.addListener(function(updatedTabId, changeInfo) {
-    if (changeInfo.status == 'loading'
-        && updatedTabId === registeredTabId
-        && changeInfo.url.search(/^http:\/\/www.nicovideo.jp\/watch\//) == -1){
-        unregister();
-    }
-});
+}
 
 // for onMessage callback functions
 function register(args, sender){
